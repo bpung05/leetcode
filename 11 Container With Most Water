@@ -1,0 +1,27 @@
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        l = 0
+        r = len(height) - 1
+
+        #two pointers. While they dont cross, calculate max height
+        #max height is the comparing the min(l,r) *2 to whatever is there. 
+
+        max_volume = 0
+
+        while r >= l:
+           
+            h_r = height[r]
+            h_l = height[l]
+            area = min (h_r, h_l) * (r-l)
+
+            if area > max_volume:
+                max_volume= area
+            if h_r >= h_l:
+                l = l + 1
+            else:
+               
+                r = r - 1
+            
+        return max_volume
+
+
