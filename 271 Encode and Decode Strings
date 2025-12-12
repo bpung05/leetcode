@@ -1,0 +1,40 @@
+class Solution:
+    def __init__(self):
+        self.lengths = []
+        
+
+    def encode(self, strs: List[str]) -> str:
+        stringy = ""
+        for string in strs:
+            self.lengths.append(len(string))           
+            stringy += string
+        return stringy
+        
+    def decode(self, s: str) -> List[str]:
+        #char_count will keep track of how many characters int he word
+        char_count = 0
+        #where in the length array we are
+        length_index = 0
+        #
+        words = []
+  
+        #find the numbers of chars that make a word, 
+        #two pointer until end of array
+        for index in range(len(str(s))):
+            #find the length of the word we want
+            length = self.lengths[length_index]
+            char_count += 1
+
+           # print("index: ", index, " length: ",length, " char_count: " , char_count )
+            if char_count == length:
+                #found the word
+                #take and parse it to words
+                words.append(s[index-(char_count-1):index+1])
+                length_index += 1
+                char_count = 0
+                #reset the char count
+
+           
+
+        
+        return words
