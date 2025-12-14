@@ -1,0 +1,33 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        #logic in this,
+        #keep track of the count of the most frequence 
+        # in any window, move the left pointer if not valid window
+        # NOT VALID window includings more than K non-dominant chars.
+        #update the max length
+
+        hash_map = {}  # char -> count in the window
+        max_len = 0
+        max_count = 0 #max occurances of ANY char in the string
+        l = 0
+
+        for r in range(len(s)):
+            char = s[r]
+            if char not in hash_map:
+                hash_map[char] = 1
+            else:
+                hash_map[char] += 1
+
+            #update the number of counts in the window
+            max_count = max(max_count , hash_map[char])
+
+            # Max occuring char
+            while (r -l + 1) - max_count > k:
+                #remove the left count
+                hash_map[s[l]] -= 1
+                l += 1
+
+            max_len = max(max_len, (r-l+1))
+
+                
+        return max_len
